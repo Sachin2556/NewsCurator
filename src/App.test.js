@@ -1,8 +1,16 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders health news daily header', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  await waitFor(() => {
+    const headerElement = screen.getByText(/Health News Daily/i);
+    expect(headerElement).toBeInTheDocument();
+  });
+});
+
+test('renders loading spinner initially', () => {
+  render(<App />);
+  const loadingElement = screen.getByText(/Loading health news/i);
+  expect(loadingElement).toBeInTheDocument();
 });
